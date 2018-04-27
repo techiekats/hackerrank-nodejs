@@ -1,10 +1,15 @@
 'use strict';
 const definition = x => typeof x !== 'undefined';
-
+const mapper = ([x, ...xs], fn) => !x ? [] : [fn(x), ...mapper(xs, fn)];
+const reverseArray = ([x, ...xs]) => definition(x) ? [...reverseArray(xs), x] : [];
+const firstN = ([x, ...xs], n) => definition(x) && n ? [x, ...firstN(xs, n-1)] : [];
+const lastN = (xs, n) => reverseArray(firstN(reverseArray(xs), n));
 exports.head = ([x]) => x;;
 exports.tail = ([x,...xs]) => xs;
 exports.def = definition;
 exports.undef = x => !definition(x);
 exports.copy = array => [...array];
-//exports.map = ([x, ...xs], fn) => !x ? [] : [fn(x), ...map(xs, fn)];
-//module.exports= function () {return 2;}
+exports.map = mapper;
+exports.first = firstN;
+exports.last = lastN;
+exports.reverse = reverseArray;
