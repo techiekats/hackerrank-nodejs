@@ -12,3 +12,6 @@ console.log(f.filter([2,3, 67, 4], (a)=> a<= 10));
 console.log(f.reject([2,3, 67, 4], (a)=> a<= 10));
 console.log(f.reduce([1,4,5,7], (a,b) => a+b, 0));
 console.log(f.partial((a,b)=>(b+a)*3, 5)(2));
+console.log(f.pluck('firstname', {lastname:'shah', firstname:'K'}))
+var temp = f.flow(a=> a*2, b=>b-2);
+console.log(f.map([2,3], temp));

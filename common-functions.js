@@ -12,7 +12,9 @@ const filter = ([x, ...xs], pred) => definition(x) ? (pred(x) ? [x, ...filter(xs
 const reject = ([x, ...xs], pred) =>definition(x) ? (pred(x)? reject(xs, pred) : [x, ...reject(xs, pred)]) :[];
 const reduce = ([x, ...xs], acc, memo) => definition(x) ? reduce(xs, acc, acc(x, memo)) : memo;
 const partial = (fn, ...args) => (...newArgs) => fn(...args, ...newArgs);
-const flow = (...args) => init => reduce(args, (memo, fn) => fn(memo), init);
+const pluck = (key, object) => object[key];
+const any = ([x, ...xs], pred) => definition(x) ? pred(x) ? true : any(xs) : false;
+
 exports.head = head;
 exports.tail = tail;
 exports.def = definition;
@@ -27,4 +29,6 @@ exports.filter = filter;
 exports.reject = reject;
 exports.reduce = reduce;
 exports.partial = partial;
-exports.flow = flow;
+exports.pluck = pluck;
+exports.any = any;
+//TODO: flow and compose
