@@ -9,6 +9,8 @@ var test3 = p.permutation(3,2,[]);
 console.log(test3);
 var test4 = p.permutation(4, 2, []);
 console.log(test4);
+var test5 = p.permutation(6, 3, []);
+console.log(test5);
 /*console.log (f.head([12,3,45,5]));
 console.log(f.tail([2,3,4]));
 console.log(f.def(f));

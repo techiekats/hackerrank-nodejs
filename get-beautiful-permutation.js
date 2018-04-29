@@ -6,18 +6,14 @@ const permutation = (remaining, desiredCount, acc) => {
         return acc;
     }
     let nextPosition = acc.length + 1;
-    let ele1 = nextPosition + desiredCount;
-    let ele2 = nextPosition - desiredCount;
-    var arrangement = [];
-    if(ele1 > 0 && ele1 <= (remaining + acc.length) && !f.any(acc, a=> a==ele1)) {                
-        arrangement = permutation(remaining-1, desiredCount, acc.concat(ele1) );
+    let n = remaining + acc.length;
+    let ele1 = (nextPosition + desiredCount) % (n+1);
+    let ele2 = (nextPosition - desiredCount) % (n+1);    
+    let nextEle = ele2 > ele1 ? ele2 : ele1;
+    if(nextEle > 0 && nextEle <= n && !f.any(acc, a=> a==nextEle)) {                
+        return permutation(remaining-1, desiredCount, acc.concat(nextEle) );
     }
-    if (arrangement.length === 0) {
-        if(ele2 > 0 && ele2 <= (remaining + acc.length) && !f.any(acc, a=> a==ele2)) {          
-            arrangement = permutation(remaining-1, desiredCount, acc.concat(ele2) );
-        }   
-    }
-    return arrangement;
+    return [];
 }
 
 exports.permutation = permutation;
