@@ -13,7 +13,7 @@ const reject = ([x, ...xs], pred) =>definition(x) ? (pred(x)? reject(xs, pred) :
 const reduce = ([x, ...xs], acc, memo) => definition(x) ? reduce(xs, acc, acc(x, memo)) : memo;
 const partial = (fn, ...args) => (...newArgs) => fn(...args, ...newArgs);
 const pluck = (key, object) => object[key];
-const any = ([x, ...xs], pred) => definition(x) ? pred(x) ? true : any(xs) : false;
+const any = ([x, ...xs], pred) => definition(x) ? pred(x) ? true : any(xs,pred) : false;
 
 exports.head = head;
 exports.tail = tail;
