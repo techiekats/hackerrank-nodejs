@@ -2,7 +2,13 @@ const f = require('./common-functions')
 const p = require('./get-beautiful-permutation')
 
 var test1 = p.permutation(2,1,[]);
-console.assert(test1, [1,2]);
+console.log(test1);
+var test2 = p.permutation(3,0,[]);
+console.log(test2);
+var test3 = p.permutation(3,2,[]);
+console.log(test3);
+var test4 = p.permutation(4, 2, []);
+console.log(test4);
 /*console.log (f.head([12,3,45,5]));
 console.log(f.tail([2,3,4]));
 console.log(f.def(f));
