@@ -1,7 +1,10 @@
 const f = require('./common-functions')
 const p = require('./get-beautiful-permutation')
+const pt = require('./pascal-triangle')
 
-var test1 = p.permutation(2,1,[]);
+var triangle = pt.pascalTriangle(0, 3, [[]]);
+pt.printTriangle(triangle);
+/*var test1 = p.permutation(2,1,[]);
 console.log(test1);
 var test2 = p.permutation(3,0,[]);
 console.log(test2);
@@ -11,6 +14,10 @@ var test4 = p.permutation(4, 2, []);
 console.log(test4);
 var test5 = p.permutation(6, 3, []);
 console.log(test5);
+var test6 = p.permutation(100,2, []);
+console.log(test6);*/
+//var test7 = p.permutation(Number.MAX_SAFE_INTEGER, 1, []);
+//console.log(test7);
 /*console.log (f.head([12,3,45,5]));
 console.log(f.tail([2,3,4]));
 console.log(f.def(f));
