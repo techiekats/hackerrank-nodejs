@@ -9,8 +9,19 @@ const permutation = (remaining, desiredCount, acc) => {
     let n = remaining + acc.length;
     let ele1 = (nextPosition + desiredCount) % (n+1);
     let ele2 = (nextPosition - desiredCount) % (n+1);    
-    let nextEle = ele2 > ele1 ? ele2 : ele1;
-    if(nextEle > 0 && nextEle <= n && !f.any(acc, a=> a==nextEle)) {                
+    let nextEle = -1;
+    if (ele2 < ele1){
+        let temp = ele1;
+        ele1 = ele2;
+        ele2 = temp;
+    }
+    if (ele1 > 0 && !f.any(acc, a=> a===ele1)) {
+        nextEle = ele1;
+    }
+    else if (ele2 > 0 && !f.any(acc, a=> a === ele2)) {
+        nextEle = ele2;
+    }
+    if(nextEle > 0) {                
         return permutation(remaining-1, desiredCount, acc.concat(nextEle) );
     }
     return [];
