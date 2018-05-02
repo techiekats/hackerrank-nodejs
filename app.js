@@ -2,7 +2,8 @@ const f = require('./common-functions')
 const p = require('./get-beautiful-permutation')
 const pt = require('./pascal-triangle')
 
-var triangle = pt.pascalTriangle(0, 3, [[]]);
+var triangle = pt.pascalTriangle(0, 2, [[]]);
+//console.log(triangle);
 pt.printTriangle(triangle);
 /*var test1 = p.permutation(2,1,[]);
 console.log(test1);

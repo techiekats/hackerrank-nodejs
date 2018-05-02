@@ -1,7 +1,5 @@
 'use strict';
 
-const f = require('./common-functions')
-
 const printTriangle = t => t.forEach(element => {
     let s = '';
     element.forEach(e=> s = `${s} ${e}`);
@@ -20,19 +18,14 @@ const pascalTriangle = (row, max, triangle) => {
         return triangle;
     }
     let r = triangle[row-1];
-    let prevElement = 1;
+    let prevElement = 0;
     let newRow = [];
     r.forEach(e=> {
-        if (e===1) {
-            newRow.concat(1);
-        }
-        else {
-            newRow.concat(prevElement + e);
-        }
+        newRow = newRow.concat(prevElement + e);
         prevElement = e;
     });
-    newRow.concat(1);
-    return pascalTriangle(row+1, max, triangle.concat(newRow));
+    newRow = newRow.concat(1);
+    return pascalTriangle(row+1, max, triangle.concat([newRow]));
 };
 
 exports.pascalTriangle = pascalTriangle;
