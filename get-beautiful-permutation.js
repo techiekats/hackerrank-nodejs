@@ -1,19 +1,41 @@
 'use strict';
 
-const f = require('./common-functions')
-const permutation = (remaining, desiredCount, acc) => {
-    if (remaining === 0) {
+const generate = (n,i=0, acc = []) => {
+    if (i==n) {
         return acc;
     }
-    let nextPosition = acc.length + 1;
-    let n = remaining + acc.length;
-    let ele1 = (nextPosition + desiredCount) % (n+1);
-    let ele2 = (nextPosition - desiredCount) % (n+1);    
-    let nextEle = ele2 > ele1 ? ele2 : ele1;
-    if(nextEle > 0 && nextEle <= n && !f.any(acc, a=> a==nextEle)) {                
-        return permutation(remaining-1, desiredCount, acc.concat(nextEle) );
+    return generate (n, i+1, acc.concat(i+1));
+};
+const generateWithSeed = (n,seed) => {
+    let seedArray = [];
+    for (let i=0; i<n; i++) {
+        seedArray = seedArray.concat(seed);
     }
-    return [];
+    return seedArray;
+}
+const permutation = (n, d) => {
+    if (d==0){
+        return generate(n)
+    }
+    if (n%2 == 1) {
+        return [];
+    }
+    var result = generateWithSeed(n, -1);
+    for (let i=1; i <= n; i++) {
+        let index = i-1;
+        if (result[index] === -1) {
+            let p = (i + d) % (n+1);
+            if (p==0){
+                return [];
+            }
+            result[index] = p;
+            if(result[p-1] !== -1) {
+                return [];
+            }
+            result[p-1] = i;
+        }
+    }
+    return result;
 }
 
 exports.permutation = permutation;

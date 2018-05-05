@@ -1,4 +1,5 @@
 'use strict';
+const fs = require('fs');
 //borrowed from : https://medium.com/dailyjs/functional-js-with-es6-recursive-patterns-b7d0813ef9e3
 const head = ([x]) => x;
 const tail = ([x,...xs]) => xs;
@@ -31,4 +32,5 @@ exports.reduce = reduce;
 exports.partial = partial;
 exports.pluck = pluck;
 exports.any = any;
+exports.writeToFile = (name, content, callback) => fs.writeFile(name, content, callback);
 //TODO: flow and compose
