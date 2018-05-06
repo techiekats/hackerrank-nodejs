@@ -1,26 +1,14 @@
 'use strict';
 
-const generate = (n,i=0, acc = []) => {
-    if (i==n) {
-        return acc;
-    }
-    return generate (n, i+1, acc.concat(i+1));
-};
-const generateWithSeed = (n,seed) => {
-    let seedArray = [];
-    for (let i=0; i<n; i++) {
-        seedArray = seedArray.concat(seed);
-    }
-    return seedArray;
-}
 const permutation = (n, d) => {
     if (d==0){
-        return generate(n)
+        return Array.from(new Array(n), (val, index)=> index+1);
     }
     if (n%2 == 1) {
         return [];
     }
-    var result = generateWithSeed(n, -1);
+    var result = new Array(n);
+    result.fill(-1);
     for (let i=1; i <= n; i++) {
         let index = i-1;
         if (result[index] === -1) {
