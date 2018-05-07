@@ -1,9 +1,9 @@
 const f = require('./common-functions')
 const p = require('./get-beautiful-permutation')
 const pt = require('./pascal-triangle')
-const ss = require('./sam-and-substrings')
+const ss = require('./sams-substring')
 
-var substrings = ss.getSubstringSum('101');
+var substrings = ss.getSamsSubstring('1234');
 console.log(substrings);
 
 /* PASCALS Triangles
