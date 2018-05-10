@@ -2,10 +2,15 @@ const f = require('./common-functions')
 const p = require('./get-beautiful-permutation')
 const pt = require('./pascal-triangle')
 const ss = require('./sams-substring')
+const fs = require('fs')
 
-var substrings = ss.getSamsSubstring('1234');
-console.log(substrings);
-
+/*console.log(ss.getSamsSubstring('12'));
+console.log(ss.getSamsSubstring('123'));
+console.log(ss.getSamsSubstring('1234'));
+console.log(ss.getSamsSubstring('12345'));
+console.log(ss.getSamsSubstring('123456'));*/
+var tc6 = fs.readFileSync('/Users/HSHAH/Documents/Code/hackerrank-nodejs/testcases/sams-substring-tc6.txt', 'utf-8');
+console.log(ss.getSamsSubstring(tc6));
 /* PASCALS Triangles
 var triangle = pt.pascalTriangle(0, 2, [[]]);
 pt.printTriangle(triangle);*/
