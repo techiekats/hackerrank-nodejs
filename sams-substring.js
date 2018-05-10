@@ -15,9 +15,18 @@ const getSamsSubstring = (s) => {
             moduloDictionary[i] = (moduloDictionary[i-1] * 10) % modulo;
         }
     }
+    let aggregateDictionary = {}
+    for (let i=0; i<=n; i++) {
+        if (i==0) {
+            aggregateDictionary[i] = moduloDictionary[i];
+        }
+        else {
+            aggregateDictionary[i] = (aggregateDictionary[i-1] + moduloDictionary[i]) % modulo;
+        }
+    }
     for (let i=0; i<n; i++) {
         let integer = parseInt(s.charAt(i));
-        sum = sum + sumToFallingPower (integer, n, multiplier, modulo, moduloDictionary);
+        sum = sum + sumToFallingPower (integer, n, multiplier, modulo, aggregateDictionary);
         multiplier++;
         if (sum >= modulo) {
             sum %= modulo;
@@ -29,14 +38,7 @@ const getSamsSubstring = (s) => {
 const sumToFallingPower = (a, n, m, modulo, moduloDictionary) => {
     let power = n - m;
     let sum = 0;
-    while (power>=0) {
-        sum = sum + (moduloDictionary[power] * a);
-        if (sum >= modulo) {
-            sum %= modulo;
-        }
-        power--;
-    }
-    return (sum * m) % modulo;
+    return (moduloDictionary[power] * a * m) % modulo;
 }
 
 exports.getSamsSubstring = getSamsSubstring;
