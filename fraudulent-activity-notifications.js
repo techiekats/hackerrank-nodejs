@@ -28,11 +28,25 @@ const getFraudulentNotificationCount = (activity, d) => {
             else if (lastN[d-2] >= next) {
                 addIndex = d;
             }
-            else    {
-                for (let j=1;j<d-1; j++) {
-                    if (lastN[j-1] <= next && lastN[j] >= n) {
-                        addIndex = j;
+            else    {                
+                //find first x greater than or equal to next
+                let a = 0;
+                let b = d-2;
+                while (b>=a) {
+                    if (b==a) {
+                        addIndex = a;
+                        break; 
+                    }
+                    let c = Math.floor((b-a)/2);
+                    if (lastN[c] === next) {
+                        addIndex = c;
                         break;
+                    }
+                    else if (lastN[c] < next) {
+                        b = c;
+                    }
+                    else if (lastN[c] > next) {
+                        a = c;
                     }
                 }
             }
