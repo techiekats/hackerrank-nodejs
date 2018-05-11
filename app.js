@@ -5,7 +5,8 @@ const ss = require('./sams-substring')
 const fn = require('./fraudulent-activity-notifications')
 const fs = require('fs')
 
-console.log(fn.getFraudulentNotificationCount([1,2,4,3,2],4));
+console.log(fn.getFraudulentNotificationCount([1,2,4,3,40],4));
+console.log(fn.getFraudulentNotificationCount([2,3,4,2,3,6,8,4,5], 5));
 /*console.log(ss.getSamsSubstring('12'));
 console.log(ss.getSamsSubstring('123'));
 console.log(ss.getSamsSubstring('1234'));
