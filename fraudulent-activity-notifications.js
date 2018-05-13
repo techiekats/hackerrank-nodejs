@@ -1,28 +1,43 @@
-const constructSorted = (arr) => {
-    return arr.sort();
+const constructDict = (useCaseBound) => {
+    let dict = new Array(useCaseBound + 1); // e.g. 0 .. 200
+    for (let i=0; i<=useCaseBound;i++) {
+        dict[i] = 0;
+    }
+    return dict;
+};
+const findMedian = (frequency, center, e) => {
+    let sum=0;
+    for (let i=0; i<=e; i++) {
+        sum+= frequency[i];
+        if (sum>= center) {
+            return i;
+        }
+        if (center-sum == 0.5) {
+            return i+0.5;
+        }
+    }
 }
 
 const activityNotifications = (activity, d) => {
-    let lastN = constructSorted(activity.slice(0, d));
+    let expenditureBound = 200;//as per use case
+    let lastN = constructDict(expenditureBound); 
+    for (let i=0; i<d; i++) {
+        lastN[activity[i]] = lastN[activity[i]] + 1;
+    }
     let n = activity.length;
-    let center = d%2 == 1 ? [d/2-0.5] : [d/2 - 1, d/2];
+    let center = d%2 == 0 ? (d+1) / 2 : (d/2 + 0.5);
     let counter = 0;
     for (let i=d; i < n; i++){
-        let median = d%2 == 1 ? lastN[center[0]] : (lastN[center[0]] + lastN[center[1]])/ 2;
-        
+        let median = findMedian(lastN, center, expenditureBound);
+        //console.log(median)
         if (activity[i] >= 2*median) {
             counter++;            
         }
         if (i !== n-1) {
             let next = activity[i];
             let toRemove = activity[i-d];
-            let removeIndex = lastN.indexOf(toRemove);
-            let addIndex = -1;
-            lastN.splice(removeIndex,1);
-            //TODO: binary search for index
-            lastN.splice(addIndex, 0, next);
-            console.log(addIndex)
-            console.log(lastN)
+            lastN[toRemove] = lastN[toRemove] -1;
+            lastN[next] = lastN[next] + 1;
         }
     }
     return counter;
