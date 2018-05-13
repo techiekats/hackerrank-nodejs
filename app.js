@@ -4,12 +4,14 @@ const pt = require('./pascal-triangle')
 const ss = require('./sams-substring')
 const fn = require('./fraudulent-activity-notifications')
 const fs = require('fs')
+const t = require('./tara-beautiful-perms')
 
-console.log(fn.activityNotifications([1,2,4,3,40],4));//1
+console.log(t.beautifulPermutations([1,2,3,4]));
+/*console.log(fn.activityNotifications([1,2,4,3,40],4));//1
 console.log(fn.activityNotifications([2,3,4,2,3,6,8,4,5], 5));//2
 console.log(fn.activityNotifications([1,2,2,4,3], 4));//0
 console.log(fn.activityNotifications([1,2,4,8,16],1));//4
-
+*/
 /*console.log(ss.getSamsSubstring('12'));
 console.log(ss.getSamsSubstring('123'));
 console.log(ss.getSamsSubstring('1234'));
