@@ -4,21 +4,36 @@ const fs = require('fs');
 
 
 // Complete the leastTimeToInterview function below.
-function leastTimeToInterview(k, adjList, adjMatrix, visited,timeInstant, node, signalOn) {
+function leastTimeToInterview(n,k, adjList, adjMatrix, visited,timeInstant, node) {
     //mark node visited
     visited[node] = 1;
     if (instant % k == 0) {
-        instant+=k;
+        if ((instant / k)%2 == 1) {
+            instant += k;
+        }        
     }
-
+    let minDistance = Number.MAX_SAFE_INTEGER;
+    adjList[node-1].forEach( e => {
+        if (visited[e] == undefined) {
+            let currentDist = -1;
+            if (e == n) {
+                currentDist = adjMatrix[e-1][node-1];
+            }
+            else {
+                currentDist = leastTimeToInterview (k, adjList, adjMatrix, visited, timeInstant + adjMatrix[node-1][e], e+1);                
+            }
+            if (currentDist < minDistance) {
+                minDistance = currentDist;
+            }
+        }
+    });
+    return minDistance;
 }
 
 function main() {
 
     const n = 7;
-
     const k = 4;
-
     const m = 7;
   
     let input = "1 2 3,2 3 1,1 4 4,4 6 7,7 5 2,3 5 1,4 5 5".split(',');
@@ -46,7 +61,7 @@ function main() {
         adjList[b].push(a);
         
     });
-    const result = leastTimeToInterview(n, k, m, adjList, adjMatrix, {},0, 1);
+    const result = leastTimeToInterview(n, k, adjList, adjMatrix, {},0, 1);
 
     console.log(adjMatrix);
     console.log(adjList);
