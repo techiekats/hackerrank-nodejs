@@ -5,7 +5,7 @@ const fs = require('fs');
 
 // Complete the leastTimeToInterview function below.
 function leastTimeToInterview(n,k, adjList, visited,instant, node) {
-//    console.log(`leastTimeToInterview(${n},${k},adjL, ${visited}, ${instant}, ${node})`);
+    console.log(`leastTimeToInterview(${n},${k},adjL, ${visited}, ${instant}, ${node})`);
     //mark node visited
     visited[node] = 1;
     if (instant % k == 0) {
@@ -17,12 +17,12 @@ function leastTimeToInterview(n,k, adjList, visited,instant, node) {
     Object.keys(adjList[node]).forEach( e => {        
         if (visited[e] == undefined) {
             let currentDist = -1;
-            if (e == n) {               
+            if (e == n) {            
+                console.log(`adding ${adjList[node][e]} to ${instant}`);   
                 currentDist = instant +  adjList[node][e];
             }
             else {
                 let clone = Object.assign({}, visited);
-                //console.log(`adding ${adjMatrix[node-1][e-1]} to ${instant}`);
                 currentDist = leastTimeToInterview (n, k, adjList, clone, instant + adjList[node][e], e);                
             }
             if (currentDist < minDistance) {
@@ -34,12 +34,32 @@ function leastTimeToInterview(n,k, adjList, visited,instant, node) {
 }
 
 function main() {
-
+    //Expected: 9
+    const n = 4;
+    const m = 4;
+    const k = 5;
+    let input ="1 2 1,2 2 1,2 3 4,3 4 3".split(',');
+    /* Expected : 0
+    const n = 1;
+    const k = 4;
+    const m = 1;
+    let input = "1 2 4".split(",");*/
+    /* Expected:9
+    const n = 5;
+    const k = 5;
+    const m = 5;
+    let input = "1 2 1,2 3 4,3 5 3,2 4 3,4 3 2".split(',');*/
+   /* Expected : 8
+    const n=5;
+    const k=3;
+    const m=5;
+    let input = "1 2 2,2 3 4,3 4 1,3 5 8,4 5 1".split(',');*/
+/*
     const n = 7;
     const k = 4;
     const m = 7;
   
-    let input = "1 2 3,2 3 1,1 4 4,4 6 7,7 5 2,3 5 1,4 5 5".split(',');
+    let input = "1 2 3,2 3 1,1 4 4,4 6 7,7 5 2,3 5 1,4 5 5".split(',');*/
     let adjList = {};
     input.forEach(element => {
         var edge = element.split(' ');
@@ -57,7 +77,7 @@ function main() {
         adjList[b][a] = w;
         
     });
-    const result = leastTimeToInterview(n, k, adjList, {},0, 1);
+    const result = (n==1) ? 0 : (m==1) ? adjList[1][n]  :leastTimeToInterview(n, k, adjList, {},0, 1);
     console.log(result);
     console.log(adjList);
 }
