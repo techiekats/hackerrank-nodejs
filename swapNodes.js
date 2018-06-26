@@ -54,12 +54,12 @@ class Node
             var temp = this.left;
             this.left = this.right;
             this.right = temp;
-            if (this.left !== -1) {
-                this.left.swap(k);
-            }
-            if (this.right !== -1) {
-                this.right.swap(k);
-            }
+        }
+        if (this.left !== -1) {
+            this.left.swap(k);
+        }
+        if (this.right !== -1) {
+            this.right.swap(k);
         }
     };
     addLeft (value) {
@@ -73,31 +73,27 @@ class Node
 }
 
 function swapNodes(indexes, queries) {
-    var result = "";
+    var result = [];
 
-    var stack = [];
+    var queue = [];
     var root = new Node (1,1);
-    stack.push(root);//root
-    indexes.forEach(i=>{
-        var currentNode = stack.pop();
-        
-        var d = currentNode.depth;
+    queue.push(root);//root
+    for (let j=0; j< indexes.length; j++){
+        let i=indexes[j];
+        var currentNode = queue.shift();
+        //the order of pushing matters !!
         if (i[0] != -1) {
             var left = currentNode.addLeft(i[0]);
-            stack.push(left);
+            queue.push(left);
         }
         if (i[1] != -1) {
             var right = currentNode.addRight(i[1]);
-            stack.push(right);
+            queue.push(right);
         }
-        //console.log(currentNode);
-    });
+    }
     queries.forEach(element => {
-        //console.log(root);
         root.swap(element);
-
-        result += root.inorder();
-        result += "\n";
+        result.push(root.inorder());
     });
     return result;
 }
@@ -113,12 +109,37 @@ function main() {
 -1 -1
 2
 1
-1 */
+1 
     indexes = [[2,3], [-1,-1], [-1,-1]];
-    queries = [1,1];
+    queries = [1,1];*/
+    /*5
+2 3
+-1 4
+-1 5
+-1 -1
+-1 -1
+1
+2
+    indexes = [[2,3],[-1,4],[-1,5],[-1,-1],[-1,-1]];
+    queries = [2];*/ 
+    /*11
+2 3
+4 -1
+5 -1
+6 -1
+7 8
+-1 9
+-1 -1
+10 11
+-1 -1
+-1 -1
+-1 -1
+2
+2
+4*/
+    indexes = [[2,3],[4,-1],[5,-1],[6,-1],[7,8],[-1,9],[-1,-1],[10,11],[-1,-1],[-1,-1],[-1,-1]];
+    queries = [2,4];
     let result = swapNodes(indexes, queries);
-    console.log(result);
-    //console.log(result.map(x => x.join(' ')).join("\n") + "\n");
-    //ws.end();
+    console.log(result.join("\n") + "\n");
 }
 main();
