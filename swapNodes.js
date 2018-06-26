@@ -22,29 +22,30 @@ function readLine() {
     return inputString[currentLine++];
 }
 
-function node (value, depth) 
-{   
-    this.left = -1;
-    this.right = -1;
-    this.value = value;
-    this.depth = depth;
-    //only does inorder. No swaps
-    this.inorder = () => {
-          if (this.value == -1) {
-              return "";
-          }
-          if (this.left == -1 && this.right == -1) {
-              return this.value;
-          }
-          if (this.left == -1) {
-              return this.value + this.right.inorder();
-          }
-          if (this.right == -1) {
-              return this.left.inorder() + this.value;
-          }
+class Node 
+{  
+    constructor(value, depth) {
+        this.left = -1;
+        this.right = -1;
+        this.value = value;
+        this.depth = depth;
     };
-    this.swap = (k) => {
-        if (depth % k == 0) {
+    inorder () {
+        if (this.value == -1) {
+            return "";
+        }
+        if (this.left == -1 && this.right == -1) {
+            return  "" + this.value + "";
+        }
+        if (this.left == -1) {
+            return this.value + this.right.inorder();
+        }
+        if (this.right == -1) {
+            return this.left.inorder() + this.value;
+        }
+    };
+    swap (k) {
+        if (this.depth % k == 0) {
             var temp = this.left;
             this.left = this.right;
             this.right = temp;
@@ -55,58 +56,44 @@ function node (value, depth)
                 this.right.swap(k);
             }
         }
-    }
-    
-    this.addLeft = (value) => {
-        this.left = node(value, this.depth + 1);
-    }
-    this.addRight = (value) => {
-        this.right = node(value, this.depth + 1);
-    }
-}
-
-function stack () {
-    const ds = new Object();
-    ds.arr = [];
-    ds.isEmpty = () => {
-        return this.arr.length === 0;
-    }
-    ds.push = (x) => {
-        this.arr.push(x);
-    }   
-    ds.pop = () => {
-        if (arr.length === 0) {
-            throw "Can't pop from empty stack";
-        }
-        return arr[arr.length-1];
-    }  
-    return ds;
+    };
+    addLeft (value) {
+        this.left = new Node(value, this.depth + 1);
+    };
+    addRight (value) {
+        this.right = new Node(value, this.depth + 1);
+    };
 }
 
 function swapNodes(indexes, queries) {
     var result = "";
     queries.forEach(element => {
-        var s = stack();
-        var root = node (1,1);
-        s.push(root);//root
+        var stack = [];
+        var root = new Node (1,1);
+        stack.push(root);//root
         indexes.forEach(i=>{
-            var currentNode = s.pop();
+            var currentNode = stack.pop();
+            
             var d = currentNode.depth;
             if (i[0] != -1) {
-                var left = node(i[0], d+1);
-                node.addLeft(left);
-                s.push(left);
+                var left = new Node(i[0], d+1);
+                currentNode.addLeft(left);
+                stack.push(left);
             }
             if (i[1] == -1) {
-                var right = node (i[1], d+1);
-                node.addRight(right);
-                s.push(right);
+                var right = new Node (i[1], d+1);
+                currentNode.addRight(right);
+                stack.push(right);
             }
+            //console.log(currentNode);
         });
+        //console.log(root);
         root.swap(element);
+
         result += root.inorder();
         result += "\n";
     });
+    return result;
 }
 
 function main() {
@@ -124,7 +111,7 @@ function main() {
     indexes = [[2,3], [-1,-1], [-1,-1]];
     queries = [1,1];
     let result = swapNodes(indexes, queries);
-
+    console.log(result);
     //console.log(result.map(x => x.join(' ')).join("\n") + "\n");
     //ws.end();
 }
