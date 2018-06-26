@@ -74,24 +74,25 @@ class Node
 
 function swapNodes(indexes, queries) {
     var result = "";
+
+    var stack = [];
+    var root = new Node (1,1);
+    stack.push(root);//root
+    indexes.forEach(i=>{
+        var currentNode = stack.pop();
+        
+        var d = currentNode.depth;
+        if (i[0] != -1) {
+            var left = currentNode.addLeft(i[0]);
+            stack.push(left);
+        }
+        if (i[1] != -1) {
+            var right = currentNode.addRight(i[1]);
+            stack.push(right);
+        }
+        //console.log(currentNode);
+    });
     queries.forEach(element => {
-        var stack = [];
-        var root = new Node (1,1);
-        stack.push(root);//root
-        indexes.forEach(i=>{
-            var currentNode = stack.pop();
-            
-            var d = currentNode.depth;
-            if (i[0] != -1) {
-                var left = currentNode.addLeft(i[0]);
-                stack.push(left);
-            }
-            if (i[1] != -1) {
-                var right = currentNode.addRight(i[1]);
-                stack.push(right);
-            }
-            //console.log(currentNode);
-        });
         //console.log(root);
         root.swap(element);
 
