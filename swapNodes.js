@@ -35,14 +35,19 @@ class Node
             return "";
         }
         if (this.left == -1 && this.right == -1) {
-            return  "" + this.value + "";
+            return  new String(this.value).toString();
         }
         if (this.left == -1) {
-            return this.value + this.right.inorder();
+            var expr = this.right.inorder().toString();
+            return `${this.value} ${expr}`;
         }
         if (this.right == -1) {
-            return this.left.inorder() + this.value;
+            var expr = this.left.inorder().toString();
+            return `${expr} ${this.value}`;
         }
+        var l = this.left.inorder().toString();
+        var r = this.right.inorder().toString();
+        return `${l} ${this.value} ${r}`;
     };
     swap (k) {
         if (this.depth % k == 0) {
@@ -59,9 +64,11 @@ class Node
     };
     addLeft (value) {
         this.left = new Node(value, this.depth + 1);
+        return this.left;
     };
     addRight (value) {
         this.right = new Node(value, this.depth + 1);
+        return this.right;
     };
 }
 
@@ -76,13 +83,11 @@ function swapNodes(indexes, queries) {
             
             var d = currentNode.depth;
             if (i[0] != -1) {
-                var left = new Node(i[0], d+1);
-                currentNode.addLeft(left);
+                var left = currentNode.addLeft(i[0]);
                 stack.push(left);
             }
-            if (i[1] == -1) {
-                var right = new Node (i[1], d+1);
-                currentNode.addRight(right);
+            if (i[1] != -1) {
+                var right = currentNode.addRight(i[1]);
                 stack.push(right);
             }
             //console.log(currentNode);
