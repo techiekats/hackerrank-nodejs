@@ -41,4 +41,12 @@ const sumToFallingPower = (a, n, m, modulo, moduloDictionary) => {
     return (moduloDictionary[power] * a * m) % modulo;
 }
 
-exports.getSamsSubstring = getSamsSubstring;
+console.log(getSamsSubstring('12'));
+console.log(getSamsSubstring('123'));
+console.log(getSamsSubstring('1234'));
+console.log(getSamsSubstring('12345'));
+console.log(getSamsSubstring('123456'));
+
+const fs = require('fs')
+var tc6 = fs.readFileSync('./testcases/sams-substring-tc6.txt', 'utf-8');
+console.log(getSamsSubstring(tc6));

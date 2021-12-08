@@ -28,5 +28,5 @@ const pascalTriangle = (row, max, triangle) => {
     return pascalTriangle(row+1, max, triangle.concat([newRow]));
 };
 
-exports.pascalTriangle = pascalTriangle;
-exports.printTriangle = printTriangle;
+var triangle = pascalTriangle(0, 2, [[]]);
+printTriangle(triangle);

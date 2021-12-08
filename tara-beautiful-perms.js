@@ -57,4 +57,4 @@ const beautifulPermutations = (arr) =>
     return result;
 }
 
-exports.beautifulPermutations = beautifulPermutations;
+console.log(beautifulPermutations([1,2,3,4]));

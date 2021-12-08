@@ -43,4 +43,7 @@ const activityNotifications = (activity, d) => {
     return counter;
 }
 
-exports.activityNotifications = activityNotifications;
+console.log(activityNotifications([1,2,4,3,40],4));//1
+console.log(activityNotifications([2,3,4,2,3,6,8,4,5], 5));//2
+console.log(activityNotifications([1,2,2,4,3], 4));//0
+console.log(activityNotifications([1,2,4,8,16],1));//4
