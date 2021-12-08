@@ -36,11 +36,12 @@ class Heap {
               break;
             }
           }
-          else if (this.compareFn(left, right) > 0 && this.compareFn(this.heap[current], left) < 0) {            
+          //NOTE: do not forget the case when left & right child are equal but greater than current
+          else if (this.compareFn(left, right) >= 0 && this.compareFn(this.heap[current], left) < 0) {            
             [this.heap[current], this.heap[current * 2 + 1]] = [this.heap[current * 2 + 1], this.heap[current]];
             current = current * 2 + 1;
           }
-          else if (this.compareFn(right, left) > 0 &&  this.compareFn(this.heap[current], right) < 0){
+          else if (this.compareFn(right, left) >= 0 &&  this.compareFn(this.heap[current], right) < 0){
             [this.heap[current], this.heap[current * 2 + 2]] = [this.heap[current * 2 + 2], this.heap[current]];
             current = current * 2 + 2;
           }
@@ -53,7 +54,11 @@ class Heap {
     }
 }
 
-// var h = new Heap((a,b)=> b-a);
+// var h = new Heap((a,b)=> a-b);
+// [4,1,2,2].forEach(x=> h.insert(x));
+// for (let i=0; i<4; i++) {
+//   console.log(h.remove());
+// }
 // [25,57,48,37,12,92,86,33].forEach(x=> h.insert(x));
 // for (let i=0; i<8; i++) {
 //   console.log(h.remove());
