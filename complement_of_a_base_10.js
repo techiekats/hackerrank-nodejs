@@ -10,5 +10,5 @@ function find_complement_of_a_base_10 (num) {
     xor -=1;
     return num ^ xor;
 }
-console.assert (find_complement_of_a_base_10(8), 7);
-console.assert(find_complement_of_a_base_10(10), 8);
+console.assert (find_complement_of_a_base_10(8) == 7);
+console.assert(find_complement_of_a_base_10(10) == 8);

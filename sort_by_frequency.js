@@ -69,5 +69,5 @@ function sort_by_frequency (str) {
 }
 console.log(sort_by_frequency('Programming'));
 console.log(sort_by_frequency('abcbab'));
-console.assert(sort_by_frequency('Programming'), 'rrggmmPiano');
-console.assert(sort_by_frequency('abcbab'), 'bbbaac');
+console.assert(sort_by_frequency('Programming') == 'rrggmmPiano');
+console.assert(sort_by_frequency('abcbab') == 'bbbaac');
