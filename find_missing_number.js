@@ -1,3 +1,4 @@
+//NOTE: example of cyclic sort
 function find_missing_number (arr) {
     let n = arr.length;    //3
     for (let i=0; i<n; i++) { // i = 0 ..2
@@ -7,8 +8,7 @@ function find_missing_number (arr) {
             arr[i] = arr[expected_position]; 
             arr[expected_position] = temp; //[3,1,2]
         }
-    }
-    console.log(arr);
+    }    
     //now validate
     for (let i=0; i<n; i++) {
         if (arr[i] != i) {
