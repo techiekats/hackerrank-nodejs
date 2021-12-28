@@ -7,6 +7,7 @@ class TrieNode {
     addString  = function (arr) {
         if (arr.length == 0) {
             this.isTerminalNode = true;
+            this.childrenCount = 1;
         }
         else {
             let char = arr[0];    
@@ -57,3 +58,9 @@ t.addString('hack'.split(''));
 t.addString('hackerrank'.split(''));
 console.assert(t.getPartialStringCount('hac') == 2);
 console.assert(t.getPartialStringCount('hak') == 0)
+
+t.addString('z'.split(''));
+console.assert(t.getPartialStringCount(['z']) == 1);
+console.assert(t.getPartialStringCount(['t']) == 0);
+console.assert(t.getPartialStringCount('khyati'.split('')) == 1);
+console.assert(t.getPartialStringCount('khyatis'.split('')) == 0);
