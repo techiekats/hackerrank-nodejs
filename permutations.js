@@ -18,10 +18,10 @@ const find_permutations = function(nums) {
         //concat merges two arrays, and returns a "new" array
         result = result.concat(current);
     });
-    return result;
+    return result.filter(x=> x.length == nums.length);
   };
   
-  console.log(`Here are all the permutations: ${find_permutations([1, 3, 5])}`)
+ result =  find_permutations([1, 3, 5]);
   result.forEach((permutation) => {
     console.log(permutation);
   });
