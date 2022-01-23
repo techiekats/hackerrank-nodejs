@@ -14,6 +14,7 @@ function topView(root: TreeNode): string {
     let result = [root.nodeValue];
     let left = 0;
     let right = 0;
+  
     while (queue.length > 0) {
         let cur = queue.shift();
         if (cur.left != null) {
@@ -23,8 +24,8 @@ function topView(root: TreeNode): string {
             queue.push(cur.right);
         }
         if (cur.level < left) {
-            result.unshift();
-            result[0] = cur.nodeValue;
+            //NOTE: specify value with unshift()
+            result.unshift(cur.nodeValue);
             left--;
         }
         if (cur.level > right) {
@@ -48,7 +49,7 @@ class TreeNode {
 }
 function insert (node: TreeNode, value: number, level: number) {
     if (node == null) {
-        node = new TreeNode(value, 0);
+        node = new TreeNode(value, level);
     }
     else {
         if (value < node.nodeValue) {
@@ -64,7 +65,9 @@ function insert (node: TreeNode, value: number, level: number) {
 }
 
 function main() {    
-    let inputs = readLine().replace(/\s+$/g, '').split(' ').map(aTemp => parseInt(aTemp, 10));
+    //let inputs = readLine().replace(/\s+$/g, '').split(' ').map(aTemp => parseInt(aTemp, 10));
+    //let inputs = [1,2,5,3,6,4]; //expected : 1 2 5 6
+    let inputs = [1, 14, 3, 7, 4, 5, 15, 6, 13, 10, 11, 2, 12, 8, 9]    //expected : 2 1 14 15 12 
     let root = null;
    
     for (let i=0; i < inputs.length; i++) {
@@ -74,4 +77,5 @@ function main() {
     console.log(result);
 }
 
+main();
 
